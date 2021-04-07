@@ -1,0 +1,2 @@
+# SEP-Server
+Blazor Server
