@@ -1,0 +1,22 @@
+﻿@page "/ConceptProofPage"
+@inject Data.IProofData ProofData
+
+<h3>ConceptProofPage</h3>
+
+<button class="btn btn-primary" @onclick="GetProve">Prove that it works.</button>
+
+<p>Does it work?</p>
+<p>@proofAnswer</p>
+
+@code {
+    private string proofAnswer;
+
+    public async Task GetProve()
+    {
+        string message = "Message to be sent.";
+        await ProofData.SendMessageAsync(message);
+
+        proofAnswer = await ProofData.GetMessageAsync();
+    }
+    
+}
