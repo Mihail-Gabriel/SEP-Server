@@ -1,0 +1,94 @@
+﻿@page "/Register"
+@using Sep3.Authorization
+
+@inject CustomAuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+
+<body>
+<div class="container-fluid text-center">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Create new account</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" placeholder="username" @bind-value="username"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="form-group">
+                <label>Password</label>
+                <input type="text" placeholder="password" @bind-value="password"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="form-group">
+                <label>Phone number</label>
+                <input type="text" placeholder="number" @bind-value="number"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="form-group">
+                <label>Address</label>
+                <input type="text" placeholder="location" @bind-value="address"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="form-group">
+                <label>City</label>
+                <input type="text" placeholder="location" @bind-value="city"/>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div style="color:red">@errorMessage</div> <a href="" @onclick="PerformRegister"><h6>Create an account</h6></a>
+        </div>
+    </div>
+</div>
+<div class="reg">
+<div class="container text-center">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <a href="Login"><h6>Back to login</h6></a>
+        </div>
+    </div>
+    </div>
+</div>
+</body>
+
+@code {
+
+    private string username;
+    private string password;
+    private string number;
+    private string address;
+    private string city;
+    private string errorMessage;
+
+    public async Task PerformRegister()
+    {
+        errorMessage = "";
+        try
+        {
+          await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateRegister(username, password, 
+              number, address, city);
+          NavigationManager.NavigateTo("/Host");
+        }
+        catch (Exception e)
+        {
+            errorMessage = e.Message;
+        }
+    }
+}
