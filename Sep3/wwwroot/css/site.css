@@ -1,7 +1,9 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
+    margin-top:7%;
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+   
 }
 
 a, .btn-link {
@@ -47,4 +49,33 @@ a, .btn-link {
         position: absolute;
         right: 0.75rem;
         top: 0.5rem;
+    }
+    
+    .inputfield {
+        width:250px;
+        height:48px;
+        margin-right: 04px;
+    }
+    
+    .container-fluid {
+        border-style: groove;
+        border-radius: 25px;
+        position: relative;
+        left:700px;
+        background-color: #d7d7d7;
+    }
+    
+    .reg {
+        position: relative;
+        left:700px;
+    }
+    
+    .topbar {
+        align-items: center;
+        align-content: center;
+    }
+    
+    .nav-item {
+        position:relative;
+         
     }

@@ -82,6 +82,13 @@ using Sep3.Shared;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 1 "C:\Users\iliya\RiderProjects\Sep-Blazor\Sep3\Shared\NavMenu.razor"
+using Sep3.Pages;
+
+#line default
+#line hidden
+#nullable disable
     public partial class NavMenu : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -90,9 +97,11 @@ using Sep3.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 28 "C:\Users\iliya\RiderProjects\Sep-Blazor\Sep3\Shared\NavMenu.razor"
+#line 47 "C:\Users\iliya\RiderProjects\Sep-Blazor\Sep3\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
+
+    private string input;
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
