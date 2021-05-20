@@ -57,7 +57,7 @@ a, .btn-link {
         margin-right: 04px;
     }
     
-    .container-fluid {
+    .regLog {
         border-style: groove;
         border-radius: 25px;
         position: relative;
@@ -65,12 +65,26 @@ a, .btn-link {
         background-color: #d7d7d7;
     }
     
+    .branchbtn {
+        border-style: groove;
+        border-color: #d7d7d7;
+        border-radius: 10px;
+    }
+    
+    .branching {
+        border-style: groove;
+        border-color: #d7d7d7;
+        border-radius: 25px;
+        position: relative;
+    }
+    
     .reg {
         position: relative;
         left:700px;
     }
     
-    .topbar {
+    .nav {
+        justify-content: center;
         align-items: center;
         align-content: center;
     }
@@ -78,4 +92,13 @@ a, .btn-link {
     .nav-item {
         position:relative;
          
+    }
+    
+    .nav-item {
+        margin-left: 20px;
+    
+    }
+    
+    .page {
+        width: 100%
     }

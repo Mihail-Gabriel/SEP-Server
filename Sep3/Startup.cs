@@ -33,8 +33,19 @@ namespace Sep3
             services.AddServerSideBlazor();
             services.AddScoped<IProofData, ProofDataService>();
             services.AddTransient<IUserService, UserWebService>();
+            services.AddScoped<IBranchService, BranchWebService>();
             
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+            
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("SecurityLevel", a => a.RequireAuthenticatedUser().RequireClaim("Level", "Admin"));
+                
+            });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("SecurityLevel", a => a.RequireAuthenticatedUser().RequireClaim("Level", "User"));
+            });
             
             services.AddHttpClient<IUserService, UserWebService>(client =>
                 client.BaseAddress = new Uri("http://localhost:8080/"));

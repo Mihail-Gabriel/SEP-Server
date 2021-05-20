@@ -1,0 +1,100 @@
+﻿@using Sep3.Models
+@using Sep3.HttpServices
+
+@inject IBranchService BranchService
+@inject NavigationManager NavigationManager
+
+@page "/Branches"
+
+<h3>Branch</h3>
+<div class="branching">
+    <div class="container-fluid">
+        <!-- This row has to be authorized view for branch managers -->
+        <div class="row">
+            <div class="col-md-4">
+                <button type="button" class="branchbtn" href="/AddBranch">Create new Branch</button>
+            </div>
+        @*    This one will not redirect to new page it will just show one extra column with button for remove.
+            <div class="col-md-4">
+                <button type="button" class="branchbtn" href="/RemoveBranches">Remove Branches</button>
+            </div>
+        *@
+            <div class="col-md-4">
+                <button type="button" class="branchbtn" href="/AddMenu">Add Menu</button>
+            </div>
+        </div>
+        <!--The authorized view ends-->
+        <div class="row">
+            <h3>Choose your branch</h3>
+        </div>
+        <div class="row">
+            @if (branchesToShow == null)
+            {
+                <p>
+                    <em>Loading...</em>
+                </p>
+            }
+            else if (!branchesToShow.Any())
+            {
+                <p>
+                    <em>Currently there are no branches. Please add some.</em>
+                </p>
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Branch</th>
+                        <th>Location</th>
+                        <th>Menu</th>
+                        <th>Book a table</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    @foreach (var item in branchesToShow)
+                    {
+                        <tr>
+                            <td>@item.theme</td>
+                            <td>@item.city</td>
+                            <td>
+                                <button @onclick="@(() => GoToMenu(item.id))">
+                                    <i class="oi oi-list" style="color:#17a2b8">Menu</i>
+                                </button>
+                            </td>
+                            <td>
+                                <button @onclick="@(() => GoToBooking(item.id))">
+                                    <i class="oi oi-list" style="color:#17a2b8">Book a table</i>
+                                </button>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+    
+</div>
+
+@code {
+    private IList<Branch> branches;
+    private IList<Branch> branchesToShow;
+    
+    /*protected override async Task OnInitializedAsync()
+    {
+        branches = await BranchService.GetBranchesAsync();
+        branchesToShow = branches;
+    }*/
+    
+    public void GoToMenu(int id)
+    {
+        NavigationManager.NavigateTo($"Menues/{id}");
+    }
+    
+    public void GoToBooking(int id)
+    {
+        NavigationManager.NavigateTo($"Booking/{id}");
+    }
+}

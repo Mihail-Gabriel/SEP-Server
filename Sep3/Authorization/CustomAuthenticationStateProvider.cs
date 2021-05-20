@@ -26,11 +26,13 @@ namespace Sep3.Authorization
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
         {
             var identity = new ClaimsIdentity();
-            if (_cachedUser == null) {
+            if (_cachedUser == null) 
+            {
                 string userAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentUser");
-                if (!string.IsNullOrEmpty(userAsJson)) {
-                    var tmp = JsonSerializer.Deserialize<User>(userAsJson);
-                    await ValidateLogin(tmp.username, tmp.password);
+                if (!string.IsNullOrEmpty(userAsJson)) 
+                {
+                    _cachedUser = JsonSerializer.Deserialize<User>(userAsJson);
+                    identity = SetupClaimsForUser(_cachedUser);
                 }
             } else {
                 identity = SetupClaimsForUser(_cachedUser);
