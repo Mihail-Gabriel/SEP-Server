@@ -1,0 +1,33 @@
+﻿@page "/AddBranch"
+@using Sep3.Models
+@using Sep3.HttpServices
+
+@inject IBranchService BranchService
+@inject NavigationManager NavigationManager
+<h3>AddBranch</h3>
+
+<EditForm Model="@newBranchItem" OnValidSubmit="@AddNewBranch">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="form-group">Branch theme: <br/> <InputText @bind-value="newBranchItem.theme"/></div>
+    <div class="form-group"> Location:<br/> <InputText @bind-Value="newBranchItem.city"/></div>
+    <div class="form-group"> Branch id:<br/> <InputNumber @bind-Value="newBranchItem.id"/></div>
+    <div class="form-group"> Menu:<br/> <InputText @bind-Value="menuName"/></div>
+    <h3 class="actions">
+        <button class="btn btn-outline-dark" type="submit">Create</button>
+    </h3>
+    
+</EditForm>
+
+@code {
+    private Branch newBranchItem = new Branch();
+    private string menuName;
+    
+    private async Task AddNewBranch()
+    {
+        newBranchItem.menu = await BranchService.GetMenuByNameAsync(menuName);
+
+        await BranchService.AddBranchAsync(newBranchItem);
+        NavigationManager.NavigateTo("/Branches");
+    }
+}

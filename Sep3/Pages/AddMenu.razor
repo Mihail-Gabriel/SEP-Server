@@ -1,0 +1,36 @@
+﻿@page "/AddMenu"
+@using Sep3.Models
+@using Sep3.HttpServices
+
+@inject IBranchService BranchService
+@inject NavigationManager NavigationManager
+
+<h3>AddMenu</h3>
+
+<EditForm Model="@newMenuItem" OnValidSubmit="@AddNewMenu">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="form-group"> Name: <br/><InputText @bind-value="newMenuItem.menuName"/></div>
+    <div class="form-group"> Meal 1: <br/><InputText @bind-value="item1.name"/></div>
+    <div class="form-group"> Meal 1 price: <br/><InputText @bind-value="item1.price"/></div>
+    <div class="form-group"> Meal 2: <br/><InputText @bind-value="item2.name"/></div>
+    <div class="form-group"> Meal 2 price: <br/><InputText @bind-value="item1.price"/></div>
+    <div class="form-group"> Meal 3: <br/><InputText @bind-value="item3.name"/></div>
+    <div class="form-group"> Meal 3 price: <br/><InputText @bind-value="item1.price"/></div>
+</EditForm>
+@code {
+    private Menu newMenuItem = new Menu();
+    private Meal item1;
+    private Meal item2;
+    private Meal item3;
+
+    private async Task AddNewMenu()
+    {
+        newMenuItem.items.Add(item1);
+        newMenuItem.items.Add(item2);
+        newMenuItem.items.Add(item3);
+
+        await BranchService.AddMenuAsync(newMenuItem);
+        NavigationManager.NavigateTo("/Branches");
+    }
+}
