@@ -83,15 +83,22 @@ using Sep3.Shared;
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\iliya\RiderProjects\Sep3\Sep3\Pages\AddMenu.razor"
+#line 4 "C:\Users\iliya\RiderProjects\Sep3\Sep3\Pages\AddMenu.razor"
 using Sep3.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\iliya\RiderProjects\Sep3\Sep3\Pages\AddMenu.razor"
+#line 5 "C:\Users\iliya\RiderProjects\Sep3\Sep3\Pages\AddMenu.razor"
 using Sep3.HttpServices;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 2 "C:\Users\iliya\RiderProjects\Sep3\Sep3\Pages\AddMenu.razor"
+           [Authorize(Policy = "SecurityLevel2")]
 
 #line default
 #line hidden
@@ -105,7 +112,7 @@ using Sep3.HttpServices;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 21 "C:\Users\iliya\RiderProjects\Sep3\Sep3\Pages\AddMenu.razor"
+#line 23 "C:\Users\iliya\RiderProjects\Sep3\Sep3\Pages\AddMenu.razor"
        
     private Menu newMenuItem = new Menu();
     private Meal item1;

@@ -4,43 +4,54 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container-fluid">
-        <div class="row align-items-center">
-            <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-                <button class="navbar-toggler" @onclick="ToggleNavMenu">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <ul class="nav">
-                    <li>
-                        <a class="navbar-brand" href="">Sep3</a>
-                    </li>
-                    <li class="nav-item">
-                        <NavLink class="nav-link" href="Branches">
-                            <span class="oi oi-home" aria-hidden="true"></span> Branch
-                        </NavLink>
-                    </li>
-                    <li class="nav-item">
-                        <NavLink class="nav-link" href="Login">
-                            <span class="oi oi-lock-unlocked" aria-hidden="true"></span> Login
-                        </NavLink>
-                    </li>
-                    <li class="nav-item">
-                        <NavLink class="nav-link" href="@input">
-                            <input class="inputfield" type="text" placeholder="Search..">
-                            <span class="oi oi-magnifying-glass"></span>
-                        </NavLink>
-                    </li>
-                    <li class="nav-item">
-                        <NavLink class="nav-link" href="ConceptProofPage">
-                            <span class="oi oi-cart" aria-hidden="true"></span>Basket
-                        </NavLink>
-                    </li>
-                </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+                    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <ul class="nav">
+                        <li>
+                            <a class="navbar-brand" href="">Sep3</a>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="Branches">
+                                <span class="oi oi-home" aria-hidden="true"></span> Branch
+                            </NavLink>
+                        </li>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="@input">
+                                <input class="inputfield" type="text" placeholder="Search..">
+                                <span class="oi oi-magnifying-glass"></span>
+                            </NavLink>
+                        </li>
+                        <AuthorizeView>
+                            <NotAuthorized>
+                                <li class="nav-item">
+                                    <NavLink class="nav-link" href="Login">
+                                        <span class="oi oi-lock-unlocked" aria-hidden="true"></span> Login
+                                    </NavLink>
+                                </li>
+                            </NotAuthorized>
+                            <Authorized>
+                            <li class="nav-item">
+                                <NavLink class="nav-link" href="" @onclick="PerformLogout">
+                                    <span class="oi oi-lock-unlocked" aria-hidden="true"></span> Log out
+                                </NavLink>
+                            </li>
+                            </Authorized>
+                        </AuthorizeView>
+                        <li class="nav-item">
+                            <NavLink class="nav-link" href="ConceptProofPage">
+                                <span class="oi oi-cart" aria-hidden="true"></span>Basket
+                            </NavLink>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
 @code {
     private bool collapseNavMenu = true;
@@ -54,4 +65,13 @@
         collapseNavMenu = !collapseNavMenu;
     }
     
+    public async Task PerformLogout()
+    {
+        try
+        {
+            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
+            NavigationManager.NavigateTo("/");
+
+        } catch (Exception e) { }}
+
 }

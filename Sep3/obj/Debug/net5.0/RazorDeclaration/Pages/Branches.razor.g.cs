@@ -105,16 +105,16 @@ using Sep3.HttpServices;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 81 "C:\Users\iliya\RiderProjects\Sep3\Sep3\Pages\Branches.razor"
+#line 86 "C:\Users\iliya\RiderProjects\Sep3\Sep3\Pages\Branches.razor"
        
     private IList<Branch> branches;
     private IList<Branch> branchesToShow;
     
-    /*protected override async Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         branches = await BranchService.GetBranchesAsync();
         branchesToShow = branches;
-    }*/
+    }
     
     public void GoToMenu(int id)
     {
@@ -124,6 +124,14 @@ using Sep3.HttpServices;
     public void GoToBooking(int id)
     {
         NavigationManager.NavigateTo($"Booking/{id}");
+    }
+
+    public async Task RemoveBranch(int id)
+    {
+        Branch toRemove = branches.First(b => b.id == id);
+        await BranchService.RemoveBranchAsync(id);
+        branches.Remove(toRemove);
+        branchesToShow.Remove(toRemove);
     }
 
 #line default

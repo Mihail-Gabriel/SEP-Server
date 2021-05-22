@@ -11,12 +11,12 @@ namespace Sep3.HttpServices
             throw new System.NotImplementedException();
         }
 
-        public Task AddBranchAsync(Branch branch)
+        public async Task AddBranchAsync(Branch branch)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task RemoveBranchAsync()
+        public async Task RemoveBranchAsync(int id)
         {
             throw new System.NotImplementedException();
         }
@@ -26,7 +26,7 @@ namespace Sep3.HttpServices
             throw new System.NotImplementedException();
         }
 
-        public Task AddMenuAsync(Menu menu)
+        public async Task AddMenuAsync(Menu menu)
         {
             throw new System.NotImplementedException();
         }

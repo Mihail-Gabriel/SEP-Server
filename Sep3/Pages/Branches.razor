@@ -9,21 +9,16 @@
 <h3>Branch</h3>
 <div class="branching">
     <div class="container-fluid">
-        <!-- This row has to be authorized view for branch managers -->
+        <AuthorizeView Policy="SecurityLevel2">
         <div class="row">
             <div class="col-md-4">
                 <button type="button" class="branchbtn" href="/AddBranch">Create new Branch</button>
             </div>
-        @*    This one will not redirect to new page it will just show one extra column with button for remove.
-            <div class="col-md-4">
-                <button type="button" class="branchbtn" href="/RemoveBranches">Remove Branches</button>
-            </div>
-        *@
             <div class="col-md-4">
                 <button type="button" class="branchbtn" href="/AddMenu">Add Menu</button>
             </div>
         </div>
-        <!--The authorized view ends-->
+        </AuthorizeView>
         <div class="row">
             <h3>Choose your branch</h3>
         </div>
@@ -49,6 +44,9 @@
                         <th>Location</th>
                         <th>Menu</th>
                         <th>Book a table</th>
+                        <AuthorizeView Policy="SecurityLevel1">
+                            <th>Remove Branch</th>
+                        </AuthorizeView>
                     </tr>
                     </thead>
 
@@ -68,6 +66,13 @@
                                     <i class="oi oi-list" style="color:#17a2b8">Book a table</i>
                                 </button>
                             </td>
+                            <AuthorizeView Policy="SecurityLevel1">
+                                <td>
+                                    <button @onclick="@(() => RemoveBranch(item.id))">
+                                        <i class="oi oi-trash">Remove</i>
+                                    </button>
+                                </td>
+                            </AuthorizeView>
                         </tr>
                     }
                     </tbody>
@@ -82,11 +87,11 @@
     private IList<Branch> branches;
     private IList<Branch> branchesToShow;
     
-    /*protected override async Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         branches = await BranchService.GetBranchesAsync();
         branchesToShow = branches;
-    }*/
+    }
     
     public void GoToMenu(int id)
     {
@@ -96,5 +101,13 @@
     public void GoToBooking(int id)
     {
         NavigationManager.NavigateTo($"Booking/{id}");
+    }
+
+    public async Task RemoveBranch(int id)
+    {
+        Branch toRemove = branches.First(b => b.id == id);
+        await BranchService.RemoveBranchAsync(id);
+        branches.Remove(toRemove);
+        branchesToShow.Remove(toRemove);
     }
 }

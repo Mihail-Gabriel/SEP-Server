@@ -104,7 +104,7 @@ using Sep3.Authorization;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 45 "C:\Users\iliya\RiderProjects\Sep3\Sep3\Shared\NavMenu.razor"
+#line 56 "C:\Users\iliya\RiderProjects\Sep3\Sep3\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 
@@ -117,6 +117,15 @@ using Sep3.Authorization;
         collapseNavMenu = !collapseNavMenu;
     }
     
+    public async Task PerformLogout()
+    {
+        try
+        {
+            await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).Logout();
+            NavigationManager.NavigateTo("/");
+
+        } catch (Exception e) { }}
+
 
 #line default
 #line hidden
