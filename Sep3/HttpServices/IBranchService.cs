@@ -10,6 +10,8 @@ namespace Sep3.HttpServices
         Task AddBranchAsync(Branch branch);
         Task RemoveBranchAsync(int id);
 
+        Task<Branch> GetBranchByIdAsync(int id);
+
         Task<Menu> GetMenuByNameAsync(string name);
 
         Task AddMenuAsync(Menu menu);

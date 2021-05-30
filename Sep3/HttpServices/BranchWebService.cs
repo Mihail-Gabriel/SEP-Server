@@ -21,6 +21,11 @@ namespace Sep3.HttpServices
             throw new System.NotImplementedException();
         }
 
+        public async Task<Branch> GetBranchByIdAsync(int id)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public async Task<Menu> GetMenuByNameAsync(string name)
         {
             throw new System.NotImplementedException();

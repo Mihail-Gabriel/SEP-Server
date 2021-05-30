@@ -4,6 +4,7 @@
 
 @inject IBranchService BranchService
 @inject NavigationManager NavigationManager
+@inject Basket Basket
 
 <h3>Menues</h3>
 
@@ -26,6 +27,7 @@ else
         <tr>
             <th>Meal name</th>
             <th>Price</th>
+            <th>Add To Basket</th>
         </tr>
         </thead>
     </table>
@@ -37,6 +39,11 @@ else
     <tr>
         <td>@item.name</td>
         <td>@item.price</td>
+        <td>
+            <button @onclick="@(() => AddToBasket())">
+               <i class="oi oi-plus" style="color:green"/>
+            </button>
+        </td>
     </tr>
 }
 </tbody>
@@ -47,5 +54,10 @@ else
     protected override async Task OnInitializedAsync()
     {
         //menu = await BranchService.GetMenuByNameAsync();
+    }
+
+    private void AddToBasket()
+    {
+        Basket.mealsForOrder.Add(menu.items.IndexOf());
     }
 }

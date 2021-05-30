@@ -42,6 +42,7 @@ namespace Sep3
                 options.AddPolicy("SecurityLevel2", a => a.RequireAuthenticatedUser().RequireClaim("Level", "Admin"));
                 
             });
+            
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("SecurityLevel1", a => a.RequireAuthenticatedUser().RequireClaim("Level", "User"));

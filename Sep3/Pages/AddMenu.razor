@@ -19,7 +19,11 @@
     <div class="form-group"> Meal 2 price: <br/><InputText @bind-value="item1.price"/></div>
     <div class="form-group"> Meal 3: <br/><InputText @bind-value="item3.name"/></div>
     <div class="form-group"> Meal 3 price: <br/><InputText @bind-value="item1.price"/></div>
+     <h3 class="actions">
+            <button class="btn btn-outline-dark" type="submit">Create</button>
+        </h3>
 </EditForm>
+
 @code {
     private Menu newMenuItem = new Menu();
     private Meal item1;

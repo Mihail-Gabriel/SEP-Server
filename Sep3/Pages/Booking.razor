@@ -1,6 +1,38 @@
 ﻿@page "/Booking/{id:int}"
-<h3>Booking</h3>
+@using Sep3.Models
+@using Sep3.HttpServices
+@attribute [Authorize(Policy = "SecurityLevel1")]
+
+@inject IBranchService BranchService
+@inject NavigationManager NavigationManager
+
+
+<h3>Booking a table in @branchToBook.theme in @branchToBook.city</h3>
+
+<EditForm Model="@newBookingItem" OnValidSubmit="@AddNewBooking">
+    <DataAnnotationsValidator/>
+    <ValidationSummary/>
+    <div class="form-group">Your Name: <br/><InputText @bind-value="newBookingItem.name"/></div>
+    <div class="form-group"> Desired Time: <br/><InputText @bind-value="newBookingItem.time"/></div>
+    <div class="form-group"> Date: <br/><InputText @bind-value="newBookingItem.date"/></div>
+     <h3 class="actions">
+            <button class="btn btn-outline-dark" type="submit">Check Availability</button>
+        </h3>
+</EditForm>
 
 @code {
+    private Branch branchToBook;
+    private BookingItem newBookingItem;
+    public int id { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        branchToBook = await BranchService.GetBranchByIdAsync(id);
+    }
+
+    public async Task AddNewBooking()
+    {
+        
+    }
     
 }
