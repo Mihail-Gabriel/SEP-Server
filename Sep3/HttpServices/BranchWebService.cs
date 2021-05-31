@@ -26,12 +26,12 @@ namespace Sep3.HttpServices
             throw new System.NotImplementedException();
         }
 
-        public async Task<Menu> GetMenuByNameAsync(string name)
+        public async Task AddNewOrderAsync(Order order)
         {
             throw new System.NotImplementedException();
         }
 
-        public async Task AddMenuAsync(Menu menu)
+        public async Task<Order> GetOrderAsync()
         {
             throw new System.NotImplementedException();
         }

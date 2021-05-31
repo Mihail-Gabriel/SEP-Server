@@ -57,7 +57,7 @@
                             <td>@item.theme</td>
                             <td>@item.city</td>
                             <td>
-                                <button @onclick="@(() => GoToMenu(item.id))">
+                                <button @onclick="@(() => GoToBranch(item.id))">
                                     <i class="oi oi-list" style="color:#17a2b8">Menu</i>
                                 </button>
                             </td>
@@ -66,7 +66,7 @@
                                     <i class="oi oi-list" style="color:#17a2b8">Book a table</i>
                                 </button>
                             </td>
-                            <AuthorizeView Policy="SecurityLevel1">
+                            <AuthorizeView Policy="SecurityLevel2">
                                 <td>
                                     <button @onclick="@(() => RemoveBranch(item.id))">
                                         <i class="oi oi-trash">Remove</i>
@@ -93,9 +93,9 @@
         branchesToShow = branches;
     }
     
-    public void GoToMenu(int id)
+    public void GoToBranch(int id)
     {
-        NavigationManager.NavigateTo($"Menues/{id}");
+        NavigationManager.NavigateTo($"ShowBranch/{id}");
     }
     
     public void GoToBooking(int id)

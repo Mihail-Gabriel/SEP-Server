@@ -12,8 +12,9 @@ namespace Sep3.HttpServices
 
         Task<Branch> GetBranchByIdAsync(int id);
 
-        Task<Menu> GetMenuByNameAsync(string name);
+        Task AddNewOrderAsync(Order order);
 
-        Task AddMenuAsync(Menu menu);
+        Task<Order> GetOrderAsync();
+
     }
 }
