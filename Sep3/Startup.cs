@@ -50,6 +50,9 @@ namespace Sep3
             
             services.AddHttpClient<IUserService, UserWebService>(client =>
                 client.BaseAddress = new Uri("http://localhost:8080/"));
+            
+            /*services.AddHttpClient<IBranchService, BranchWebService>(client =>
+                client.BaseAddress = new Uri("http://localhost:8080/"));*/
 
         }
 

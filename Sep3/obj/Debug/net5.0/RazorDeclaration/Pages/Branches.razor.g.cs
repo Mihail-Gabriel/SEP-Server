@@ -96,6 +96,13 @@ using Sep3.HttpServices;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 3 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\Branches.razor"
+using Microsoft.AspNetCore.Http.Extensions;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/Branches")]
     public partial class Branches : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -105,7 +112,7 @@ using Sep3.HttpServices;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 86 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\Branches.razor"
+#line 88 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\Branches.razor"
        
     private IList<Branch> branches;
     private IList<Branch> branchesToShow;
@@ -134,9 +141,15 @@ using Sep3.HttpServices;
         branchesToShow.Remove(toRemove);
     }
 
+    void navigateToAddBranch()
+    {
+        NavigationManager.NavigateTo("AddBranch");
+    }
+
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager UriHelper { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IBranchService BranchService { get; set; }
     }

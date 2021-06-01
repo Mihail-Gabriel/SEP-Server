@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -8,10 +9,16 @@ namespace Sep3.HttpServices
 {
     public class BranchWebService : IBranchService
     {
+        private readonly HttpClient _client;
+        public BranchWebService(HttpClient client)
+        {
+            _client = client;
+        }
+
         public async Task<List<Branch>> GetBranchesAsync()
         {
-            HttpClient client = new HttpClient();
-            HttpResponseMessage responseMessage = await client.GetAsync("http://localhost:8080/branch/all");
+            
+            HttpResponseMessage responseMessage = await _client.GetAsync("http://localhost:8080/branch/all");
 
             if (!responseMessage.IsSuccessStatusCode)
                 throw new (@"Error:{responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
@@ -27,7 +34,10 @@ namespace Sep3.HttpServices
 
         public async Task AddBranchAsync(Branch branch)
         {
-            throw new System.NotImplementedException();
+           
+            HttpResponseMessage response = await _client.PostAsync("http://localhost:8080/branch/add",new StringContent(branch.ToString()));
+            if (!response.IsSuccessStatusCode)
+                throw new Exception(@"Error:{responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
         }
 
         public async Task RemoveBranchAsync(int id)

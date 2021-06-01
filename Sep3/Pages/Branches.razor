@@ -1,8 +1,10 @@
 ﻿@using Sep3.Models
 @using Sep3.HttpServices
+@using Microsoft.AspNetCore.Http.Extensions
 
 @inject IBranchService BranchService
 @inject NavigationManager NavigationManager
+@inject NavigationManager UriHelper
 
 @page "/Branches"
 
@@ -12,7 +14,7 @@
         <AuthorizeView Policy="SecurityLevel2">
         <div class="row">
             <div class="col-md-4">
-                <button type="button" class="branchbtn" href="/AddBranch">Create new Branch</button>
+                <button type="button" class="branchbtn" @onclick=@navigateToAddBranch href="/AddBranch">Create new Branch</button>
             </div>
             <div class="col-md-4">
                 <button type="button" class="branchbtn" href="/AddMenu">Add Menu</button>
@@ -109,5 +111,10 @@
         await BranchService.RemoveBranchAsync(id);
         branches.Remove(toRemove);
         branchesToShow.Remove(toRemove);
+    }
+
+    void navigateToAddBranch()
+    {
+        NavigationManager.NavigateTo("AddBranch");
     }
 }

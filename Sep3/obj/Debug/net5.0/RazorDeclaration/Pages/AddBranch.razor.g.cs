@@ -96,13 +96,6 @@ using Sep3.HttpServices;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 2 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\AddBranch.razor"
-           [Authorize(Policy = "SecurityLevel2")]
-
-#line default
-#line hidden
-#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/AddBranch")]
     public partial class AddBranch : Microsoft.AspNetCore.Components.ComponentBase
     {
