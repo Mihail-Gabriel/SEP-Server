@@ -12,9 +12,9 @@
 <EditForm Model="@newBookingItem" OnValidSubmit="@AddNewBooking">
     <DataAnnotationsValidator/>
     <ValidationSummary/>
-    <div class="form-group">Your Name: <br/><InputText @bind-value="newBookingItem.name"/></div>
-    <div class="form-group"> Desired Time: <br/><InputText @bind-value="newBookingItem.time"/></div>
-    <div class="form-group"> Date: <br/><InputText @bind-value="newBookingItem.date"/></div>
+    <div class="form-group">Your Name: <br/><InputText @bind-value="newBookingItem.Name"/></div>
+    <div class="form-group"> Desired Time: <br/><InputText @bind-value="newBookingItem.Time"/></div>
+    <div class="form-group"> Date: <br/><InputText @bind-value="newBookingItem.Date"/></div>
      <h3 class="actions">
             <button class="btn btn-outline-dark" type="submit">Check Availability</button>
         </h3>

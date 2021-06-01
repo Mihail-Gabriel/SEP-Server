@@ -5,7 +5,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
-using Sep3.Data;
+
 using Sep3.HttpServices;
 using Sep3.Models;
 
@@ -31,7 +31,8 @@ namespace Sep3.Authorization
                 string userAsJson = await jsRuntime.InvokeAsync<string>("sessionStorage.getItem", "currentUser");
                 if (!string.IsNullOrEmpty(userAsJson)) 
                 {
-                    _cachedUser = JsonSerializer.Deserialize<User>(userAsJson);
+                    User tmp = JsonSerializer.Deserialize<User>(userAsJson);
+                    await ValidateLogin(tmp.username, tmp.password);
                     identity = SetupClaimsForUser(_cachedUser);
                 }
             } else {
@@ -95,6 +96,9 @@ namespace Sep3.Authorization
         private ClaimsIdentity SetupClaimsForUser(User user)
         {
             List<Claim> claims = new List<Claim>();
+            claims.Add(new Claim(ClaimTypes.Name, user.username));
+            claims.Add(new Claim("role",user.role));
+            
             ClaimsIdentity identity = new ClaimsIdentity(claims, "apiauth_type");
             return identity;
         }

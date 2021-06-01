@@ -39,13 +39,13 @@ namespace Sep3
             
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("SecurityLevel2", a => a.RequireAuthenticatedUser().RequireClaim("Level", "Admin"));
+                options.AddPolicy("SecurityLevel2", a => a.RequireAuthenticatedUser().RequireClaim("role", "Admin"));
                 
             });
             
             services.AddAuthorization(options =>
             {
-                options.AddPolicy("SecurityLevel1", a => a.RequireAuthenticatedUser().RequireClaim("Level", "User"));
+                options.AddPolicy("SecurityLevel1", a => a.RequireAuthenticatedUser().RequireClaim("role", "User"));
             });
             
             services.AddHttpClient<IUserService, UserWebService>(client =>

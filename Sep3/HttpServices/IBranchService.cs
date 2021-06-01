@@ -12,9 +12,5 @@ namespace Sep3.HttpServices
 
         Task<Branch> GetBranchByIdAsync(int id);
 
-        Task AddNewOrderAsync(Order order);
-
-        Task<Order> GetOrderAsync();
-
     }
 }

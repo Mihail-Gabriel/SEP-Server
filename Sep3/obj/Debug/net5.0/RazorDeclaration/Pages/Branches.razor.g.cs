@@ -13,84 +13,84 @@ namespace Sep3.Pages
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "C:\Users\iliya\RiderProjects\Sep3\Sep3\_Imports.razor"
+#line 1 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\_Imports.razor"
 using System.Net.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\iliya\RiderProjects\Sep3\Sep3\_Imports.razor"
+#line 2 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\_Imports.razor"
 using Microsoft.AspNetCore.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\iliya\RiderProjects\Sep3\Sep3\_Imports.razor"
+#line 3 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\_Imports.razor"
 using Microsoft.AspNetCore.Components.Authorization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "C:\Users\iliya\RiderProjects\Sep3\Sep3\_Imports.razor"
+#line 4 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "C:\Users\iliya\RiderProjects\Sep3\Sep3\_Imports.razor"
+#line 5 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "C:\Users\iliya\RiderProjects\Sep3\Sep3\_Imports.razor"
+#line 6 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "C:\Users\iliya\RiderProjects\Sep3\Sep3\_Imports.razor"
+#line 7 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "C:\Users\iliya\RiderProjects\Sep3\Sep3\_Imports.razor"
+#line 8 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\_Imports.razor"
 using Microsoft.JSInterop;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "C:\Users\iliya\RiderProjects\Sep3\Sep3\_Imports.razor"
+#line 9 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\_Imports.razor"
 using Sep3;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 10 "C:\Users\iliya\RiderProjects\Sep3\Sep3\_Imports.razor"
+#line 10 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\_Imports.razor"
 using Sep3.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 1 "C:\Users\iliya\RiderProjects\Sep3\Sep3\Pages\Branches.razor"
+#line 1 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\Branches.razor"
 using Sep3.Models;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\iliya\RiderProjects\Sep3\Sep3\Pages\Branches.razor"
+#line 2 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\Branches.razor"
 using Sep3.HttpServices;
 
 #line default
@@ -105,7 +105,7 @@ using Sep3.HttpServices;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 86 "C:\Users\iliya\RiderProjects\Sep3\Sep3\Pages\Branches.razor"
+#line 86 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\Branches.razor"
        
     private IList<Branch> branches;
     private IList<Branch> branchesToShow;
@@ -116,9 +116,9 @@ using Sep3.HttpServices;
         branchesToShow = branches;
     }
     
-    public void GoToMenu(int id)
+    public void GoToBranch(int id)
     {
-        NavigationManager.NavigateTo($"Menues/{id}");
+        NavigationManager.NavigateTo($"ShowBranch/{id}");
     }
     
     public void GoToBooking(int id)

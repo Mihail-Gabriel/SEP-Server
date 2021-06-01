@@ -7,6 +7,6 @@
         public string address { get; set; }
         public string telephoneNo { get; set; }
         public string city { get; set; }
-        public string securityLevel { get; set; }
+        public string role { get; set; }
     }
 }
