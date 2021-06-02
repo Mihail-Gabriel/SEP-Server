@@ -105,7 +105,7 @@ using Sep3.HttpServices;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 32 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\AddBranch.razor"
+#line 27 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\AddBranch.razor"
        
     private Branch newBranchItem = new Branch();
 

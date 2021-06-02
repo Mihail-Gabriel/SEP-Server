@@ -8,26 +8,21 @@
 @inject NavigationManager NavigationManager
 <h3>AddBranch</h3>
 
-<EditForm Model="@newBranchItem" OnValidSubmit="@AddNewBranch">
-    <DataAnnotationsValidator/>
-    <ValidationSummary/>
-    <div class="form-group">Branch theme: <br/> <InputText @bind-value="newBranchItem.theme"/></div>
-    <div class="form-group"> Location:<br/> <InputText @bind-Value="newBranchItem.city"/></div>
-    <div class="form-group"> Branch id:<br/> <InputNumber @bind-Value="newBranchItem.id"/></div>
-    
+<div class="form-group">Branch theme: <br/> <input type="text" @bind-value="newBranchItem.theme"/></div>
+    <div class="form-group"> Location:<br/> <input type="text" @bind-value="newBranchItem.city"/></div>
+    <div class="form-group"> Branch id:<br/> <input type="number" @bind-value="newBranchItem.id"/></div>
+
     <h5>Menu items:</h5>
-      <div class="form-group"> Meal 1: <br/><InputText @bind-value="item1.name"/></div>
-        <div class="form-group"> Meal 1 price: <br/><InputText @bind-value="item1.price"/></div>
-        <div class="form-group"> Meal 2: <br/><InputText @bind-value="item2.name"/></div>
-        <div class="form-group"> Meal 2 price: <br/><InputText @bind-value="item1.price"/></div>
-        <div class="form-group"> Meal 3: <br/><InputText @bind-value="item3.name"/></div>
-        <div class="form-group"> Meal 3 price: <br/><InputText @bind-value="item1.price"/></div>
-    
-    <h3 class="actions">
-        <button class="btn btn-outline-dark" type="submit">Create</button>
-    </h3>
-    
-</EditForm>
+      <div class="form-group"> Meal 1: <br/><input type="text" @bind-value="item1.name"/></div>
+        <div class="form-group"> Meal 1 price: <br/><input type="number" @bind-value="item1.price"/></div>
+        <div class="form-group"> Meal 2: <br/><input type="text" @bind-value="item2.name"/></div>
+        <div class="form-group"> Meal 2 price: <br/><input type="number" @bind-value="item1.price"/></div>
+        <div class="form-group"> Meal 3: <br/><input type="text" @bind-value="item3.name"/></div>
+        <div class="form-group"> Meal 3 price: <br/><input type="number" @bind-value="item1.price"/></div>
+
+<h3 class="actions">
+    <button class="btn btn-outline-dark" type="button">Create</button>
+</h3>
 
 @code {
     private Branch newBranchItem = new Branch();

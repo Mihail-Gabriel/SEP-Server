@@ -42,7 +42,10 @@ namespace Sep3.HttpServices
 
         public async Task RemoveBranchAsync(int id)
         {
-            throw new System.NotImplementedException();
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.DeleteAsync("http://localhost:8080/branch/remove?id"+id);
+            if (!response.IsSuccessStatusCode)
+                throw new Exception(@"Error:{responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
         }
 
         public async Task<Branch> GetBranchByIdAsync(int id)
