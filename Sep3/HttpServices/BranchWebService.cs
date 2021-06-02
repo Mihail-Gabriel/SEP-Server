@@ -5,6 +5,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Sep3.Models;
 
+
 namespace Sep3.HttpServices
 {
     public class BranchWebService : IBranchService
@@ -34,8 +35,10 @@ namespace Sep3.HttpServices
 
         public async Task AddBranchAsync(Branch branch)
         {
-           
-            HttpResponseMessage response = await _client.PostAsync("http://localhost:8080/branch/add",new StringContent(branch.ToString()));
+            string jsonBranch = JsonSerializer.Serialize(branch);
+            Console.WriteLine(jsonBranch);
+            HttpResponseMessage response = await _client.PostAsync("http://localhost:8080/branch/add",new StringContent(jsonBranch));
+            
             if (!response.IsSuccessStatusCode)
                 throw new Exception(@"Error:{responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
         }
@@ -47,10 +50,43 @@ namespace Sep3.HttpServices
             if (!response.IsSuccessStatusCode)
                 throw new Exception(@"Error:{responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
         }
+        public async Task AddFoodToBranchAsync(Food food)
+        {
+            string jsonFood = JsonSerializer.Serialize(food);
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.PostAsync("http://localhost:8080/food/add", new StringContent(jsonFood));
+            if (!response.IsSuccessStatusCode)
+                throw new Exception(@"Error:{responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
+        }
+
+        public async Task<List<Food>> GetFood(int id)
+        {
+             
+            HttpResponseMessage responseMessage = await _client.GetAsync("http://localhost:8080/food/getById?id="+id);
+
+            if (!responseMessage.IsSuccessStatusCode)
+                throw new (@"Error:{responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
+            string result = await responseMessage.Content.ReadAsStringAsync();
+            List<Food> foodList  = JsonSerializer.Deserialize<List<Food>>(result, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            return foodList;
+        }
 
         public async Task<Branch> GetBranchByIdAsync(int id)
         {
-            throw new System.NotImplementedException();
+            HttpClient client = new HttpClient();
+            HttpResponseMessage response = await client.GetAsync("http://localhost:8080/branch/id?id="+id);
+            if (!response.IsSuccessStatusCode)
+                throw new Exception(@"Error:{responseMessage.StatusCode},{responseMessage.ReasonPhrase}");
+            string result = await response.Content.ReadAsStringAsync();
+            
+            Branch branch = JsonSerializer.Deserialize<Branch>(result, new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+            });
+            return branch;
         }
 
         public async Task AddNewOrderAsync(Order order)
@@ -62,5 +98,7 @@ namespace Sep3.HttpServices
         {
             throw new System.NotImplementedException();
         }
+        
+        
     }
 }

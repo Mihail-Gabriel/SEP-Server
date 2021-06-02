@@ -14,10 +14,7 @@
         <AuthorizeView Policy="SecurityLevel2">
         <div class="row">
             <div class="col-md-4">
-                <button type="button" class="branchbtn" @onclick=@navigateToAddBranch href="/AddBranch">Create new Branch</button>
-            </div>
-            <div class="col-md-4">
-                <button type="button" class="branchbtn" href="/AddMenu">Add Menu</button>
+                <button type="button" class="branchbtn" @onclick=@NavigateToAddBranch href="/AddBranch">Create new Branch</button>
             </div>
         </div>
         </AuthorizeView>
@@ -42,12 +39,14 @@
                 <table class="table">
                     <thead>
                     <tr>
+                        <th>Theme</th>
                         <th>Branch</th>
                         <th>Location</th>
                         <th>Menu</th>
                         <th>Book a table</th>
                         <AuthorizeView Policy="SecurityLevel2">
                             <th>Remove Branch</th>
+                            <th>Add food</th>
                         </AuthorizeView>
                     </tr>
                     </thead>
@@ -57,23 +56,29 @@
                     {
                         <tr>
                             <td>@item.theme</td>
+                            <td>@item.branchName</td>
                             <td>@item.city</td>
                             <td>
-                                <button @onclick="@(() => GoToBranch(item.id))">
+                                <button @onclick="@(() => GoToBranch(item.branchId))">
                                     <i class="oi oi-list" style="color:#17a2b8">Menu</i>
                                 </button>
                             </td>
                             <td>
-                                <button @onclick="@(() => GoToBooking(item.id))">
+                                <button @onclick="@(() => GoToBooking(item.branchId))">
                                     <i class="oi oi-list" style="color:#17a2b8">Book a table</i>
                                 </button>
                             </td>
                             <AuthorizeView Policy="SecurityLevel2">
                                 <td>
-                                    <button @onclick="@(() => RemoveBranch(item.id))">
+                                    <button @onclick="@(() => RemoveBranch(item.branchId))">
                                         <i class="oi oi-trash">Remove</i>
                                     </button>
                                 </td>
+                                <td>
+                                    <button @onclick="@(() => AddFood(item.branchId))">
+                                        <i class="oi oi-plus">Add food</i>
+                                    </button>
+                                    </td>
                             </AuthorizeView>
                         </tr>
                     }
@@ -97,24 +102,34 @@
     
     public void GoToBranch(int id)
     {
-        NavigationManager.NavigateTo($"ShowBranch/{id}");
+        Branch branch = branches.First(b => b.branchId == id);
+        NavigationManager.NavigateTo($"BranchMenu/{id}");
     }
     
     public void GoToBooking(int id)
     {
+        
         NavigationManager.NavigateTo($"Booking/{id}");
     }
 
     public async Task RemoveBranch(int id)
     {
-        Branch toRemove = branches.First(b => b.id == id);
+        Branch toRemove = branches.First(b => b.branchId == id);
         await BranchService.RemoveBranchAsync(id);
         branches.Remove(toRemove);
         branchesToShow.Remove(toRemove);
     }
 
-    void navigateToAddBranch()
+    void NavigateToAddBranch()
     {
         NavigationManager.NavigateTo("AddBranch");
     }
+
+    private void AddFood(int id)
+    {
+        Branch branch = branches.First(b => b.branchId == id);
+        NavigationManager.NavigateTo($"AddFood/{id}");
+        
+    }
+
 }

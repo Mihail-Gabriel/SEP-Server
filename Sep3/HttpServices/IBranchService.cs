@@ -12,5 +12,8 @@ namespace Sep3.HttpServices
 
         Task<Branch> GetBranchByIdAsync(int id);
 
+        Task AddFoodToBranchAsync(Food food);
+
+        Task<List<Food>> GetFood(int id);
     }
 }

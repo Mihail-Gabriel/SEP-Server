@@ -82,8 +82,22 @@ using Sep3.Shared;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/ConceptProofPage")]
-    public partial class ConceptProofPage : Microsoft.AspNetCore.Components.ComponentBase
+#nullable restore
+#line 2 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\AddFood.razor"
+using Sep3.HttpServices;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 3 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\AddFood.razor"
+using Sep3.Models;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/AddFood/{id}")]
+    public partial class AddFood : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -91,23 +105,36 @@ using Sep3.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 11 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\ConceptProofPage.razor"
+#line 13 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\AddFood.razor"
        
-    private string proofAnswer;
-
-    public async Task GetProve()
-    {
-        string message = "Message to be sent.";
-        await ProofData.SendMessageAsync(message);
-
-        proofAnswer = await ProofData.GetMessageAsync();
-    }
+    [Parameter]
+    public string id { get; set; }
     
+    private Food food = new Food();
+    private Branch branch = new Branch();
+
+    private int branchId ;
+    protected override void OnParametersSet()
+    {
+        branchId = Int16.Parse(id);
+    }
+
+    private async Task AddNewFood()
+    {
+        
+        branch = await BranchService.GetBranchByIdAsync(branchId);
+
+        food.branch = branch;
+        await BranchService.AddFoodToBranchAsync(food);
+        NavigationManager.NavigateTo("/Branches");
+    }
+
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private Data.IProofData ProofData { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IBranchService BranchService { get; set; }
     }
 }
 #pragma warning restore 1591

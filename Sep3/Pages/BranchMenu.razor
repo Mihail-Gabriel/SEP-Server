@@ -1,0 +1,73 @@
+﻿@page "/BranchMenu/{id}"
+
+@using Sep3.HttpServices
+@using Sep3.Models
+
+@inject IBranchService BranchService
+@inject NavigationManager NavigationManager
+
+<h3>Restaurant @branchToShow.branchName</h3>
+<h3>Location @branchToShow.city</h3>
+
+@if (foodList == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else
+{
+    <table class="table" style="width:100%">
+        <thead>
+        <tr>
+            <th>Meal name</th>
+            <th>Price</th>
+            <th>Add To Basket</th>
+        </tr>
+        </thead>
+    </table>
+    }
+<tbody>
+@foreach (var item in foodList)
+{
+    <div>
+<tr class="table_food" style="width:100%">
+    <td colspan="">@item.foodName.ToUpper()</td>
+    <td>@item.foodPrice kr</td>
+    <td>
+        <button @onclick="@(() => AddToBasket(item.foodName, item.foodPrice))">
+            <i class="oi oi-plus" style="color:green"/>
+        </button>
+    </td>
+</tr>
+</div>
+}
+</tbody>
+@code {
+    [Parameter]
+    public string id { get; set; }
+    
+    public Branch branchToShow = new Branch();
+    public List<Food> foodList = new List<Food>();
+
+
+    private int branchId;
+    
+    protected override async void OnInitialized()
+    {
+        branchId = Int32.Parse(id);
+        branchToShow = await BranchService.GetBranchByIdAsync(branchId);
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        foodList = await BranchService.GetFood(branchId);
+        
+    }
+
+
+    private void AddToBasket(string itemFoodName, double itemFoodPrice)
+    {
+        throw new NotImplementedException();
+    }
+
+}

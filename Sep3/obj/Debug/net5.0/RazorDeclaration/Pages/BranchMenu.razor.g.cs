@@ -82,8 +82,22 @@ using Sep3.Shared;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/ConceptProofPage")]
-    public partial class ConceptProofPage : Microsoft.AspNetCore.Components.ComponentBase
+#nullable restore
+#line 3 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\BranchMenu.razor"
+using Sep3.HttpServices;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 4 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\BranchMenu.razor"
+using Sep3.Models;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/BranchMenu/{id}")]
+    public partial class BranchMenu : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
         protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder __builder)
@@ -91,23 +105,40 @@ using Sep3.Shared;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 11 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\ConceptProofPage.razor"
+#line 46 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\BranchMenu.razor"
        
-    private string proofAnswer;
-
-    public async Task GetProve()
-    {
-        string message = "Message to be sent.";
-        await ProofData.SendMessageAsync(message);
-
-        proofAnswer = await ProofData.GetMessageAsync();
-    }
+    [Parameter]
+    public string id { get; set; }
     
+    public Branch branchToShow = new Branch();
+    public List<Food> foodList = new List<Food>();
+
+
+    private int branchId;
+    
+    protected override async void OnInitialized()
+    {
+        branchId = Int32.Parse(id);
+        branchToShow = await BranchService.GetBranchByIdAsync(branchId);
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        foodList = await BranchService.GetFood(branchId);
+        
+    }
+
+
+    private void AddToBasket(string itemFoodName, double itemFoodPrice)
+    {
+        throw new NotImplementedException();
+    }
+
 
 #line default
 #line hidden
 #nullable disable
-        [global::Microsoft.AspNetCore.Components.InjectAttribute] private Data.IProofData ProofData { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IBranchService BranchService { get; set; }
     }
 }
 #pragma warning restore 1591

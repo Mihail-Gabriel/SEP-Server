@@ -8,36 +8,25 @@
 @inject NavigationManager NavigationManager
 <h3>AddBranch</h3>
 
-<div class="form-group">Branch theme: <br/> <input type="text" @bind-value="newBranchItem.theme"/></div>
-    <div class="form-group"> Location:<br/> <input type="text" @bind-value="newBranchItem.city"/></div>
-    <div class="form-group"> Branch id:<br/> <input type="number" @bind-value="newBranchItem.id"/></div>
-
-    <h5>Menu items:</h5>
-      <div class="form-group"> Meal 1: <br/><input type="text" @bind-value="item1.name"/></div>
-        <div class="form-group"> Meal 1 price: <br/><input type="number" @bind-value="item1.price"/></div>
-        <div class="form-group"> Meal 2: <br/><input type="text" @bind-value="item2.name"/></div>
-        <div class="form-group"> Meal 2 price: <br/><input type="number" @bind-value="item1.price"/></div>
-        <div class="form-group"> Meal 3: <br/><input type="text" @bind-value="item3.name"/></div>
-        <div class="form-group"> Meal 3 price: <br/><input type="number" @bind-value="item1.price"/></div>
+<div class="form-group"> Branch id:<br/> <input type="number" @bind-value="newBranchItem.branchId"/></div>
+<div class="form-group"> Theme: <br/> <input type="text" @bind-value="newBranchItem.theme"/></div>
+<div class="form-group"> Branch name:<br/> <input type="text" @bind-value="newBranchItem.branchName"/></div>
+<div class="form-group"> City:<br/> <input type="text" @bind-value="newBranchItem.city"/></div>
+    
 
 <h3 class="actions">
-    <button class="btn btn-outline-dark" type="button">Create</button>
+    <button class="btn btn-outline-dark" @onclick=@AddNewBranch type="button">Create</button>
 </h3>
 
 @code {
     private Branch newBranchItem = new Branch();
 
-    private Meal item1;
-    private Meal item2;
-    private Meal item3;
     
     private async Task AddNewBranch()
     {
-        newBranchItem.menu.Add(item1);
-        newBranchItem.menu.Add(item2);
-        newBranchItem.menu.Add(item3);
 
         await BranchService.AddBranchAsync(newBranchItem);
+        
         NavigationManager.NavigateTo("/Branches");
     }
 }
