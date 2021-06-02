@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Flavius-Alin\\Desktop\\iilya\\Sep-Blazor-master\\Sep3\\Sep3.csproj",
+      "projectUniqueName": "C:\\Users\\Flavius-Alin\\Desktop\\Git OWN branches\\Sep-Blazor\\Sep3\\Sep3.csproj",
       "projectName": "Sep3",
-      "projectPath": "C:\\Users\\Flavius-Alin\\Desktop\\iilya\\Sep-Blazor-master\\Sep3\\Sep3.csproj",
+      "projectPath": "C:\\Users\\Flavius-Alin\\Desktop\\Git OWN branches\\Sep-Blazor\\Sep3\\Sep3.csproj",
       "packagesPath": "C:\\Users\\Flavius-Alin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Flavius-Alin\\Desktop\\iilya\\Sep-Blazor-master\\Sep3\\obj\\",
+      "outputPath": "C:\\Users\\Flavius-Alin\\Desktop\\Git OWN branches\\Sep-Blazor\\Sep3\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Flavius-Alin\\AppData\\Roaming\\NuGet\\NuGet.Config",
