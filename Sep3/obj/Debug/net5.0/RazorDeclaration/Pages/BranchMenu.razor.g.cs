@@ -105,7 +105,7 @@ using Sep3.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 46 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\BranchMenu.razor"
+#line 48 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\BranchMenu.razor"
        
     [Parameter]
     public string id { get; set; }

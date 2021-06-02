@@ -1,0 +1,71 @@
+﻿@page "/Basket"
+@using Sep3.Models
+@using Sep3.HttpServices
+<h3>Basket</h3>
+
+@inject IBranchService BranchService
+@inject NavigationManager NavigationManager
+
+@if (newOrder.orderItems == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else if (!newOrder.orderItems.Any())
+{
+    <p>
+        <em>No meals exist in the menu. Please add some.</em>
+    </p>
+}
+else
+{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Meal name</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+    </table>
+    }
+
+<tbody>
+@foreach (var item in newOrder.orderItems)
+{
+    <tr>
+        <td>@item.Name</td>
+        <td>@item.Price</td>
+    </tr>
+}
+<tr>
+    <td>Total Price:</td>
+    <td>@newOrder.price</td>
+</tr>
+<tr>
+    <td>Name:</td>
+    <td>@newOrder.name</td>
+</tr>
+</tbody>
+
+<button @onclick="@(() => PlaceAnOrder())">
+  <i class="oi oi-plus" style="color:green"/> Order now
+</button>
+
+
+
+@code {
+    public Order newOrder = new Order();
+    public string responce;
+
+    protected override async void OnInitialized()
+    {
+       //newOrder = await BranchService.GetOrderAsync();
+    }
+
+    public void PlaceAnOrder()
+    {
+        responce = "Your order is confirmed";
+    }
+
+}

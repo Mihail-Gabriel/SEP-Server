@@ -85,6 +85,11 @@ namespace Sep3.Authorization
             }
         }
 
+        public User GetCachedUser()
+        {
+            return _cachedUser;
+        }
+
         public async Task Logout()
         {
             _cachedUser = null;

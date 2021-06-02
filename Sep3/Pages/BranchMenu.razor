@@ -2,7 +2,7 @@
 
 @using Sep3.HttpServices
 @using Sep3.Models
-
+@using Sep3.Authorization
 @inject IBranchService BranchService
 @inject NavigationManager NavigationManager
 
@@ -34,11 +34,13 @@ else
 <tr class="table_food" style="width:100%">
     <td colspan="">@item.foodName.ToUpper()</td>
     <td>@item.foodPrice kr</td>
+    <AuthorizeView Policy="SecurityLevel1">
     <td>
         <button @onclick="@(() => AddToBasket(item.foodName, item.foodPrice))">
             <i class="oi oi-plus" style="color:green"/>
         </button>
     </td>
+   </AuthorizeView>
 </tr>
 </div>
 }
@@ -46,7 +48,8 @@ else
 @code {
     [Parameter]
     public string id { get; set; }
-    
+
+    public List<Food> basket = new List<Food>();
     public Branch branchToShow = new Branch();
     public List<Food> foodList = new List<Food>();
 
@@ -67,7 +70,7 @@ else
 
     private void AddToBasket(string itemFoodName, double itemFoodPrice)
     {
-        throw new NotImplementedException();
+        
     }
 
 }

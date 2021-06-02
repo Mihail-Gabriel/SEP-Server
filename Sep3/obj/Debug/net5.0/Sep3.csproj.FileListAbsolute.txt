@@ -331,3 +331,5 @@ C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\bin\Debug\net5.0\
 C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\bin\Debug\net5.0\System.Linq.Dynamic.Core.dll
 C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\obj\Debug\net5.0\RazorDeclaration\Pages\BranchMenu.razor.g.cs
 C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\obj\Debug\net5.0\Razor\Pages\BranchMenu.razor.g.cs
+C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\obj\Debug\net5.0\RazorDeclaration\Pages\Basket.razor.g.cs
+C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\obj\Debug\net5.0\Razor\Pages\Basket.razor.g.cs
