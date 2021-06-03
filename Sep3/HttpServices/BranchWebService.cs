@@ -89,12 +89,12 @@ namespace Sep3.HttpServices
             return branch;
         }
 
-        public async Task AddNewOrderAsync(Order order)
+        public async Task AddNewOrderAsync(Orders order)
         {
             throw new System.NotImplementedException();
         }
 
-        public async Task<Order> GetOrderAsync()
+        public async Task<Orders> GetOrderAsync()
         {
             throw new System.NotImplementedException();
         }

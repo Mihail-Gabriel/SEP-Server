@@ -34,6 +34,8 @@ namespace Sep3
             services.AddScoped<IProofData, ProofDataService>();
             services.AddTransient<IUserService, UserWebService>();
             services.AddScoped<IBranchService, BranchWebService>();
+            services.AddScoped<IOrdersService, OrdersService>();
+            services.AddHttpContextAccessor();
             
             services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
             

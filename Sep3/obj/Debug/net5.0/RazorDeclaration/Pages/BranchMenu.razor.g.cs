@@ -96,6 +96,20 @@ using Sep3.Models;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 5 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\BranchMenu.razor"
+using Microsoft.AspNetCore.Http;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 6 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\BranchMenu.razor"
+using Sep3.Authorization;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/BranchMenu/{id}")]
     public partial class BranchMenu : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -105,15 +119,18 @@ using Sep3.Models;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 48 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\BranchMenu.razor"
+#line 55 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\BranchMenu.razor"
        
     [Parameter]
     public string id { get; set; }
-    
+
+    public OrderFood OrderFood{ get; set; }
+    public List<Food> basket = new List<Food>();
     public Branch branchToShow = new Branch();
     public List<Food> foodList = new List<Food>();
 
 
+    public string UserName;
     private int branchId;
     
     protected override async void OnInitialized()
@@ -123,6 +140,11 @@ using Sep3.Models;
     }
     protected override async Task OnInitializedAsync()
     {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        
+        UserName = user.Identity.Name;
+        
         foodList = await BranchService.GetFood(branchId);
         
     }
@@ -130,7 +152,18 @@ using Sep3.Models;
 
     private void AddToBasket(string itemFoodName, double itemFoodPrice)
     {
-        throw new NotImplementedException();
+        OrderFood = new OrderFood();
+        OrderFood.foodName = itemFoodName;
+        OrderFood.foodPrice = itemFoodPrice;
+        
+        Orders newUserOrder = new Orders();
+        newUserOrder.username = UserName;
+        newUserOrder.price = itemFoodPrice;
+
+        OrderFood.orders = newUserOrder;
+
+        OrdersService.AddOrderFoodAsync(OrderFood);
+
     }
 
 
@@ -138,7 +171,10 @@ using Sep3.Models;
 #line hidden
 #nullable disable
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private NavigationManager NavigationManager { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IOrdersService OrdersService { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private IBranchService BranchService { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IHttpContextAccessor httpContextAccessor { get; set; }
     }
 }
 #pragma warning restore 1591

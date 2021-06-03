@@ -15,7 +15,7 @@ namespace Sep3.Authorization
     {
         private readonly IJSRuntime jsRuntime;
         private readonly IUserService userService;
-        private User _cachedUser;
+        private User _cachedUser { get; set; }
 
         public CustomAuthenticationStateProvider(IJSRuntime jsRuntime, IUserService userService)
         {

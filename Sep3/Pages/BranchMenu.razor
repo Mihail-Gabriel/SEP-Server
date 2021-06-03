@@ -2,58 +2,67 @@
 
 @using Sep3.HttpServices
 @using Sep3.Models
-@using Sep3.Authorization
+@using Microsoft.AspNetCore.Http
+
+@inject IHttpContextAccessor httpContextAccessor
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IBranchService BranchService
+@inject IOrdersService OrdersService
 @inject NavigationManager NavigationManager
 
-<h3>Restaurant @branchToShow.branchName</h3>
-<h3>Location @branchToShow.city</h3>
+<body>
+<div class="content" >
+    <h3 >Restaurant </h3>
+    <h3 id="h3restaurant"> @branchToShow.branchName</h3>
+    <h3>Location @branchToShow.city</h3>
+    <h3 id="h3location"> @branchToShow.city</h3>
 
-@if (foodList == null)
-{
-    <p>
-        <em>Loading...</em>
-    </p>
-}
-else
-{
-    <table class="table" style="width:100%">
-        <thead>
-        <tr>
-            <th>Meal name</th>
-            <th>Price</th>
-            <th>Add To Basket</th>
-        </tr>
-        </thead>
-    </table>
+    @if (foodList == null)
+    {
+        <p>
+            <em>Loading...</em>
+        </p>
     }
-<tbody>
-@foreach (var item in foodList)
-{
-    <div>
-<tr class="table_food" style="width:100%">
-    <td colspan="">@item.foodName.ToUpper()</td>
-    <td>@item.foodPrice kr</td>
-    <AuthorizeView Policy="SecurityLevel1">
-    <td>
-        <button @onclick="@(() => AddToBasket(item.foodName, item.foodPrice))">
-            <i class="oi oi-plus" style="color:green"/>
-        </button>
-    </td>
-   </AuthorizeView>
-</tr>
+    else
+    {
+        <table class="table" id="menufood" style="width:100%">
+
+            <tr>
+                <th>Meal name</th>
+                <th>Price</th>
+                <th>Add To Basket</th>
+            </tr>
+
+            @foreach (var item in foodList)
+            {
+                <tr class="table" style="width:100%">
+                    <td colspan="">@item.foodName</td>
+                    <td>@item.foodPrice kr</td>
+                    <AuthorizeView Policy="SecurityLevel1">
+                        <td>
+                            <button @onclick="@(() => AddToBasket(item.foodName, item.foodPrice) )">
+                                <i class="oi oi-plus" style="color:green"/>
+                            </button>
+                        </td>
+                    </AuthorizeView>
+                </tr>
+
+            }
+        </table>
+    }
 </div>
-}
-</tbody>
+</body>
 @code {
     [Parameter]
     public string id { get; set; }
 
+    public OrderFood OrderFood{ get; set; }
     public List<Food> basket = new List<Food>();
     public Branch branchToShow = new Branch();
     public List<Food> foodList = new List<Food>();
 
 
+    public string UserName;
     private int branchId;
     
     protected override async void OnInitialized()
@@ -63,6 +72,11 @@ else
     }
     protected override async Task OnInitializedAsync()
     {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        
+        UserName = user.Identity.Name;
+        
         foodList = await BranchService.GetFood(branchId);
         
     }
@@ -70,6 +84,18 @@ else
 
     private void AddToBasket(string itemFoodName, double itemFoodPrice)
     {
+        OrderFood = new OrderFood();
+        OrderFood.foodName = itemFoodName;
+        OrderFood.foodPrice = itemFoodPrice;
+        
+        Orders newUserOrder = new Orders();
+        newUserOrder.username = UserName;
+        newUserOrder.price = itemFoodPrice;
+
+        OrderFood.orders = newUserOrder;
+
+        OrdersService.AddOrderFoodAsync(OrderFood);
+
         
     }
 

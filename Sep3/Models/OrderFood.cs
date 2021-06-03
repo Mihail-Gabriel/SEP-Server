@@ -2,8 +2,8 @@
 {
     public class OrderFood
     {
-        public string Name { get; set; }
-        public double Price { get; set; }
-        public Order Order { get; set; }
+        public string foodName { get; set; }
+        public double foodPrice { get; set; }
+        public Orders orders { get; set; }
     }
 }
