@@ -103,13 +103,6 @@ using Microsoft.AspNetCore.Http;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 6 "C:\Users\Flavius-Alin\Desktop\Git OWN branches\Sep-Blazor\Sep3\Pages\BranchMenu.razor"
-using Sep3.Authorization;
-
-#line default
-#line hidden
-#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/BranchMenu/{id}")]
     public partial class BranchMenu : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -164,6 +157,7 @@ using Sep3.Authorization;
 
         OrdersService.AddOrderFoodAsync(OrderFood);
 
+        
     }
 
 
