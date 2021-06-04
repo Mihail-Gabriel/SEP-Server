@@ -112,7 +112,7 @@ using Sep3.Authorization;
             await ((CustomAuthenticationStateProvider) AuthenticationStateProvider).ValidateLogin(username, password);
             username = "";
             password = "";
-            NavigationManager.NavigateTo("/Host");
+            NavigationManager.NavigateTo("/");
         }
         catch (Exception e)
         {

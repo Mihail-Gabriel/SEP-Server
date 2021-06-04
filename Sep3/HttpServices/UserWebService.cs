@@ -32,7 +32,7 @@ namespace Sep3.HttpServices
         {
             var url = "http://localhost:8080/user/register";
             
-            User newUser = new User {username = username, password = password, telephoneNo = number, address = address, city = city, role = "0"};
+            User newUser = new User {username = username, password = password, telephoneNo = number, address = address, city = city, role = "User"};
             string userAsJson = JsonSerializer.Serialize(newUser);
             HttpContent content = new StringContent(userAsJson, Encoding.UTF8, "application/json");
             
